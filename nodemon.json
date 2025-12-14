@@ -1,4 +1,6 @@
 {
-  "ignore": ["webpack.config.js"],
-  "exec": "babel-node src/init.js"
+  "watch": ["src"],
+  "ext": "js,json,html",
+  "ignore": ["dist", "node_modules"],
+  "exec": "node src/init.js"
 }

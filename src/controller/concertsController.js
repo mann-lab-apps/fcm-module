@@ -1,4 +1,4 @@
-import { db } from "../db/sqlite";
+import { db } from "../db/sqlite.js";
 
 export const writeConcert = (request, response) => {
   const { title, price } = request?.body;
@@ -11,7 +11,7 @@ export const writeConcert = (request, response) => {
 
 export const getConcert = (request, response) => {
   const { id } = request.body;
-  const stmt = db.prepare("SELECT * FROM users WHERE id = ?");
+  const stmt = db.prepare("SELECT * FROM concerts WHERE id = ?");
   return response.status(200).send(stmt.get(id));
 };
 

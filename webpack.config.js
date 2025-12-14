@@ -1,10 +1,14 @@
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from "url";
 
-module.exports = {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+export default {
+  mode: "production", // or "development"
   entry: {
     main: "./src/client/js/main.js",
   },
-  plugins: [],
   output: {
     filename: "js/[name].js",
     path: path.resolve(__dirname, "assets"),
@@ -14,6 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: "babel-loader",
           options: {

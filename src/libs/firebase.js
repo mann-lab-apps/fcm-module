@@ -3,8 +3,9 @@ import {
   FIREBASE_CLIENT_EMAIL,
   FIREBASE_PRIVATE_KEY,
   FIREBASE_PROJECT_ID,
-} from "../config";
+} from "../config/index.js";
 
+console.log("FIREBASE_PROJECT_ID", FIREBASE_PROJECT_ID);
 admin.initializeApp({
   credential: admin.credential.cert({
     type: "service_account",

@@ -1,4 +1,4 @@
-import { firebaseMessaging } from "../libs/firebase";
+import { firebaseMessaging } from "../libs/firebase.js";
 
 export const sendFcmMessage = async (request, response) => {
   let { token, title, body } = request.body;

@@ -1,5 +1,5 @@
 import express from "express";
-import { getConcert, getConcerts } from "../controller/concertsController";
+import { getConcert, getConcerts } from "../controller/concertsController.js";
 
 export const concertsRouter = express.Router();
 

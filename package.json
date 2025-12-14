@@ -2,9 +2,10 @@
   "name": "fcm-module",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/init.js",
-    "build": "babel src -d dist",
+    "dev": "nodemon src/init.js",
+    "build": "node src -d dist",
     "start": "node dist/init.js"
   },
   "author": "",
