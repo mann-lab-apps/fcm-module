@@ -22,13 +22,16 @@ export const getConcerts = (request, response) => {
 
 export const updateConcert = (request, response) => {
   const { id, title, price } = request.body;
-  const stmt = db.prepare("UPDATE concerts SET name = ?, age = ? WHERE id = ?");
-  stmt.run(id, title, price);
-  return response.status(200).send(getUser(id));
+  console.log("id, title, price", id, title, price);
+  const stmt = db.prepare(
+    "UPDATE concerts SET title = ?, price = ? WHERE id = ?"
+  );
+  stmt.run(title, price, id);
+  return response.status(200).send({ success: true });
 };
 
 export const deleteConcert = (request, response) => {
-  const { id } = request.body;
+  const { id } = request.query;
   const stmt = db.prepare("DELETE FROM concerts WHERE id = ?");
   stmt.run(id);
   return response.status(200).send({ success: true });
