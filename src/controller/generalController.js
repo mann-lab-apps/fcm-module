@@ -9,3 +9,9 @@ export const getTables = (request, response) => {
     `);
   return response.status(200).send(stmt.all());
 };
+
+export const getItems = (request, response) => {
+  const { tableName } = request.query;
+  const stmt = db.prepare(`SELECT * FROM ${tableName}`);
+  return response.status(200).send(stmt.all());
+};

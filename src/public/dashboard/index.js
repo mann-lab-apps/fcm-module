@@ -11,10 +11,11 @@ const initDashboard = async () => {
   for (let filteredTable of filteredTables) {
     if (!selectedTable) selectedTable = filteredTable.name;
     const $button = document.createElement("button");
+    $button.addEventListener("click", () => renderTable(filteredTable.name));
     $button.innerText = filteredTable.name;
     navigation.appendChild($button);
   }
-  return selectedTable;
+  renderTable("concerts");
 };
 
 const handleItemSubmit = async (event, keys) => {
@@ -65,19 +66,11 @@ const handleClickDelete = async (id) => {
   await renderTable();
 };
 
-const renderTable = async () => {
-  const selectedTable = await initDashboard();
-
+const renderTable = async (selectedTable) => {
+  console.log("selectedTable", selectedTable);
   let items;
-  if (selectedTable === "concerts") {
-    const response = await fetch("/api/concerts");
-    items = await response.json();
-  }
-  const columns = Object.keys(items[0]);
-  if (!columns) return;
-  const keys = columns.filter(
-    (column) => column !== "id" && column !== "created_at"
-  );
+  const response = await fetch(`/api/general/items?tableName=${selectedTable}`);
+  items = await response.json();
 
   const $thead = document.querySelector("thead");
   $thead.innerHTML = "";
@@ -85,6 +78,17 @@ const renderTable = async () => {
 
   const $form = document.querySelector("form");
   $form.innerHTML = "";
+
+  const $tbody = document.querySelector("tbody");
+  $tbody.innerHTML = "";
+
+  if (!items[0]) return;
+  const columns = Object.keys(items[0]);
+  if (!columns) return;
+  const keys = columns.filter(
+    (column) => column !== "id" && column !== "created_at"
+  );
+
   $form.addEventListener("submit", (event) => handleItemSubmit(event, keys));
 
   for (let column of columns) {
@@ -109,8 +113,6 @@ const renderTable = async () => {
   $submitButton.setAttribute("type", "submit");
   $form.appendChild($submitButton);
 
-  const $tbody = document.querySelector("tbody");
-  $tbody.innerHTML = "";
   for (let item of items) {
     const $tr = document.createElement("tr");
     for (let value of Object.values(item)) {
@@ -137,5 +139,5 @@ const renderTable = async () => {
   }
 };
 (async () => {
-  await renderTable();
+  await initDashboard();
 })();

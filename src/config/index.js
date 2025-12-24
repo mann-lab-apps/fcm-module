@@ -9,3 +9,5 @@ export const FIREBASE_APP_ID = process.env.FIREBASE_APP_ID;
 export const FIREBASE_PRIVATE_KEY_ID = process.env.FIREBASE_PRIVATE_KEY_ID;
 export const FIREBASE_PRIVATE_KEY = process.env.FIREBASE_PRIVATE_KEY;
 export const FIREBASE_CLIENT_EMAIL = process.env.FIREBASE_CLIENT_EMAIL;
+
+export const OPENAPI_SERVICE_KEY = process.env.OPENAPI_SERVICE_KEY;
